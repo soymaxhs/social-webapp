@@ -15,6 +15,7 @@ import { User, Post } from "@/types";
 import { getUser } from "@/services/users/api";
 import PostCard from "@/components/molecules/PostCard";
 import { getAllPosts } from "@/services/posts/api";
+import PostForm from "@/components/molecules/PostForm.tsx";
 
 export default function PostPage() {
   const router = useRouter();
@@ -61,7 +62,15 @@ export default function PostPage() {
       </Group>
 
       <Title mb="md">{`${user.name}'s Feed`}</Title>
-      <Stack gap="xs">
+      <PostForm
+        userId={user.id}
+        onSuccess={(payload) => {
+          const data = JSON.parse(payload);
+          setPosts([...posts, { ...data, id: new Date().getTime() }]);
+        }}
+      />
+
+      <Stack gap="xs" my="lg">
         {posts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}

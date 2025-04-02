@@ -22,7 +22,7 @@ export interface User {
 
 // TODO: Document properly.
 export interface Post {
-  id: number;
+  id: string;
   userId: number;
   content: string;
 }

@@ -12,7 +12,7 @@ export const getAllPosts = async (
   const data: Post[] = await res.json();
 
   const availablePosts = data.filter((post) =>
-    allowedUserIds.includes(post.userId)
+    allowedUserIds.includes(Number(post.userId))
   );
 
   return availablePosts;
