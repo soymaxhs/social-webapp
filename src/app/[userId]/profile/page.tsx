@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Container, Loader, Text, Button, Group } from "@mantine/core";
 import { User } from "@/types";
 import { getUser } from "@/services/users/api";
-import UserProfile from "@/components/molecules/organisms/UserProfile";
+import UserProfile from "@/components/organisms/UserProfile";
 
 export default function ProfilePage() {
   const params = useParams();

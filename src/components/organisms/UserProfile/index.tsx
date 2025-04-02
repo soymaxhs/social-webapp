@@ -1,6 +1,6 @@
 "use client";
 
-import { UserProfileProps } from "@/components/molecules/organisms/UserProfile/types";
+import { UserProfileProps } from "@/components/organisms/UserProfile/types";
 import { Card, Text, Group, Title, Badge, Stack, Divider } from "@mantine/core";
 
 export default function UserProfile({ user }: UserProfileProps) {
