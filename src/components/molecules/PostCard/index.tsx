@@ -9,7 +9,7 @@ import { patchLikesPost } from "@/services/posts/api";
 export default function PostCard({ post }: PostCardProps) {
   const router = useRouter();
   const params = useParams();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User>();
   const [likes, setLikes] = useState(post.likes);
 
   const userId = Number(params.userId);
@@ -18,7 +18,7 @@ export default function PostCard({ post }: PostCardProps) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const user = await getUser(userId);
+        const user = await getUser(post.userId);
         setUser(user);
       } catch (error) {
         console.log("User not found", error);
@@ -26,7 +26,7 @@ export default function PostCard({ post }: PostCardProps) {
     };
 
     fetchUser();
-  }, [userId]);
+  }, [post.userId]);
 
   const toggleLike = async () => {
     const updatedLikes = hasLiked
@@ -47,7 +47,7 @@ export default function PostCard({ post }: PostCardProps) {
   };
 
   const handlePostDetailRedirect = () => {
-    router.push(`/${user?.id}/posts/${post.id}`);
+    router.push(`/${userId}/posts/${post.id}`);
   };
 
   return (

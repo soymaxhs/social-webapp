@@ -3,10 +3,21 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Card, Stack, Text, Button, Group, Container } from "@mantine/core";
-import { getPost, patchLikesPost } from "@/services/posts/api";
+import { deletePost, getPost, patchLikesPost } from "@/services/posts/api";
 import { getUser } from "@/services/users/api";
 import { Post, User } from "@/types";
 
+/**
+ * TODO: Clean this component.
+ *
+ * - It should be split into smaller components.
+ * - It need a confirmation modal before deleting a post.
+ * - It should handle errors more gracefully.
+ * - It should use a common component for loading state.
+ * - It should use a stronger validation for deleting a post.
+ * - It should use common functionality for toggling likes.
+ * - It should use a descriptive names
+ */
 export default function PostDetailPage() {
   const router = useRouter();
   const params = useParams();
@@ -61,6 +72,15 @@ export default function PostDetailPage() {
     }
   };
 
+  const handleDeleteClick = async () => {
+    try {
+      await deletePost(postId);
+      router.push(`/${userId}/posts`);
+    } catch (error) {
+      console.error("Error deleting post", error);
+    }
+  };
+
   if (!post || !user) return <Text>Loading...</Text>;
 
   return (
@@ -89,6 +109,12 @@ export default function PostDetailPage() {
             >
               👍 {likes.length} {likes.length === 1 ? "Like" : "Likes"}
             </Button>
+
+            {Number(userId) === Number(user.id) && (
+              <Button size="sm" color="red" onClick={handleDeleteClick}>
+                Delete
+              </Button>
+            )}
           </Group>
         </Stack>
       </Card>

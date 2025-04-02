@@ -47,3 +47,10 @@ export const getPost = async (id: string): Promise<Post> => {
   const res = await fetch(`${BASE_URL}/posts/${id}`);
   return res.json();
 };
+
+// TODO: Document properly
+export const deletePost = async (id: string): Promise<void> => {
+  await fetch(`${BASE_URL}/posts/${id}`, {
+    method: "DELETE",
+  });
+};
