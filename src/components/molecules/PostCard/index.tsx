@@ -3,10 +3,11 @@ import { getUser } from "@/services/users/api";
 import { User } from "@/types";
 import { Button, Card, Group, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { patchLikesPost } from "@/services/posts/api";
 
 export default function PostCard({ post }: PostCardProps) {
+  const router = useRouter();
   const params = useParams();
   const [user, setUser] = useState<User | null>(null);
   const [likes, setLikes] = useState(post.likes);
@@ -45,6 +46,10 @@ export default function PostCard({ post }: PostCardProps) {
     }
   };
 
+  const handlePostDetailRedirect = () => {
+    router.push(`/${user?.id}/posts/${post.id}`);
+  };
+
   return (
     <Card withBorder radius="md" padding="md" shadow="xs">
       <Stack gap="xs">
@@ -56,7 +61,9 @@ export default function PostCard({ post }: PostCardProps) {
         </Group>
 
         <Group justify="space-between" grow>
-          <Button color="cyan">Details</Button>
+          <Button color="cyan" onClick={handlePostDetailRedirect}>
+            Details
+          </Button>
           <Button
             variant={hasLiked ? "light" : "outline"}
             size="xs"

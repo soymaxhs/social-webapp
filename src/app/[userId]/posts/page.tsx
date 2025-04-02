@@ -26,15 +26,11 @@ export default function PostPage() {
 
   const { userId } = params;
 
-  const friendsIds = useMemo(
-    () => (user ? [Number(user.id), ...user.friends] : []),
-    [user]
-  );
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const user = await getUser(Number(userId));
+        const friendsIds = [Number(user.id), ...user.friends];
         setUser(user);
 
         const posts = await getPosts(friendsIds);
@@ -45,7 +41,7 @@ export default function PostPage() {
     };
 
     fetchData();
-  }, [friendsIds, userId]);
+  }, [userId]);
 
   if (!user || !posts) {
     // TODO: Create a common component.
@@ -69,6 +65,7 @@ export default function PostPage() {
       <PostForm
         onSuccess={async () => {
           try {
+            const friendsIds = [Number(user.id), ...user.friends];
             const posts = await getPosts(friendsIds);
 
             setPosts(posts);

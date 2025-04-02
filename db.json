@@ -8,15 +8,8 @@
       "bio": "Just a regular guy exploring the web.",
       "location": "New York, USA",
       "emoji": "🧔",
-      "interests": [
-        "tech",
-        "music",
-        "travel"
-      ],
-      "friends": [
-        2,
-        3
-      ]
+      "interests": ["tech", "music", "travel"],
+      "friends": [2, 3]
     },
     {
       "id": "2",
@@ -26,14 +19,8 @@
       "bio": "Taco enthusiast 🌮",
       "location": "Guadalajara, MX",
       "emoji": "🧑‍💻",
-      "interests": [
-        "coding",
-        "swimming",
-        "UX"
-      ],
-      "friends": [
-        3
-      ]
+      "interests": ["coding", "swimming", "UX"],
+      "friends": [3]
     },
     {
       "id": "3",
@@ -43,14 +30,8 @@
       "bio": "The official test user for this app.",
       "location": "Internet",
       "emoji": "🛋️",
-      "interests": [
-        "community",
-        "travel",
-        "hosting"
-      ],
-      "friends": [
-        2
-      ]
+      "interests": ["community", "travel", "hosting"],
+      "friends": [2]
     }
   ],
   "posts": [

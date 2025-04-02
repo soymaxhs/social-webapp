@@ -41,3 +41,9 @@ export const patchLikesPost = async (payload: Post): Promise<Post> => {
 
   return res.json();
 };
+
+// TODO: Document properly
+export const getPost = async (id: string): Promise<Post> => {
+  const res = await fetch(`${BASE_URL}/posts/${id}`);
+  return res.json();
+};
