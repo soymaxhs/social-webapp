@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { Container, Loader, Text, Button, Group } from "@mantine/core";
 import { User } from "@/types";
 import { getUser } from "@/services/users/api";
-import { Container, Title, Text, Loader, Group, Button } from "@mantine/core";
-import { useParams, useRouter } from "next/navigation";
+import UserProfile from "@/components/molecules/organisms/UserProfile";
 
-export default function WelcomePage() {
-  const router = useRouter();
+export default function ProfilePage() {
   const params = useParams();
+  const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -26,10 +27,6 @@ export default function WelcomePage() {
     }
   }, [params]);
 
-  const handleProfileRedirect = () => {
-    router.push(`/${user?.id}/profile`);
-  };
-
   if (!user) {
     return (
       <Container>
@@ -41,10 +38,13 @@ export default function WelcomePage() {
 
   return (
     <Container>
-      <Title>Welcome, {user.name}!</Title>
-      <Group grow my="lg">
-        <Button onClick={handleProfileRedirect}>Go to profile</Button>
+      <Group align="left" mb="md">
+        <Button variant="default" onClick={() => router.back()}>
+          ← Go Back
+        </Button>
       </Group>
+
+      <UserProfile user={user} />
     </Container>
   );
 }

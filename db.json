@@ -1,7 +1,31 @@
 {
   "users": [
-    { "id": 1, "name": "John Doe" },
-    { "id": 2, "name": "Maximiliano Heredia Santoyo" },
-    { "id": 3, "name": "CouchSurfing" }
+    {
+      "id": 1,
+      "name": "John Doe",
+      "username": "johndoe",
+      "bio": "Just a regular guy exploring the web.",
+      "location": "New York, USA",
+      "emoji": "🧔",
+      "interests": ["tech", "music", "travel"]
+    },
+    {
+      "id": 2,
+      "name": "Maximiliano Heredia Santoyo",
+      "username": "soymaxhs",
+      "bio": "Software Engineer",
+      "location": "Guadalajara, MX",
+      "emoji": "🧑‍💻",
+      "interests": ["coding", "swimming", "UX design"]
+    },
+    {
+      "id": 3,
+      "name": "CouchSurfing",
+      "username": "couchsurfing",
+      "bio": "Couchsurfing is a global paid accommodation sharing service, also serving as a social network accessible through a website and mobile app.",
+      "location": "Internet",
+      "emoji": "🛋️",
+      "interests": ["community", "travel", "hosting"]
+    }
   ]
 }
