@@ -2,54 +2,55 @@
 
 import { useForm } from "react-hook-form";
 import { Textarea, Button, Stack, TextInput } from "@mantine/core";
-import { BASE_URL } from "@/services/settings/constants";
 import { Post } from "@/types";
+import { useParams } from "next/navigation";
+import { postPost } from "@/services/posts/api";
 
 // TODO: Relocate this
 type Props = {
-  userId: number;
-  onSuccess: (data: string) => void;
+  onSuccess: (post: Post) => void;
 };
 
 // TODO: Document properly
-export default function PostForm({ userId, onSuccess }: Props) {
+export default function PostForm({ onSuccess }: Props) {
+  const params = useParams();
   const { register, handleSubmit, reset, formState } = useForm<Post>();
+
+  const { userId } = params;
   const { isSubmitting } = formState;
 
   const onSubmit = async (data: Post) => {
-    const payload = JSON.stringify({
+    const payload: Post = {
       ...data,
-      userId: userId,
-    });
+      userId: Number(userId),
+    };
 
-    const res = await fetch(`${BASE_URL}/posts`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: payload,
-    });
-
-    if (res.ok) {
+    try {
+      await postPost(payload);
       reset();
       onSuccess(payload);
-    } else {
-      console.error("Failed to create post");
+    } catch (error) {
+      // TODO: Notify the user about the error.
+      console.log("Error", error);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack>
-        <TextInput placeholder="Title" {...register("title")} />
-        <Textarea
-          placeholder="What's on your mind?"
-          autosize
-          minRows={2}
-          {...register("content", { required: true })}
-        />
-        <Button type="submit" loading={isSubmitting}>
-          Post
-        </Button>
-      </Stack>
+      <fieldset disabled={isSubmitting}>
+        <Stack>
+          <TextInput {...register("title")} placeholder="Title" />
+          <Textarea
+            {...register("content")}
+            placeholder="What's on your mind?"
+            minRows={2}
+            autosize
+          />
+          <Button type="submit" loading={isSubmitting}>
+            Post
+          </Button>
+        </Stack>
+      </fieldset>
     </form>
   );
 }

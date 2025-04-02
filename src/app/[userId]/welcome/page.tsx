@@ -9,22 +9,22 @@ import { useParams, useRouter } from "next/navigation";
 export default function WelcomePage() {
   const router = useRouter();
   const params = useParams();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User>();
+
+  const { userId } = params;
 
   useEffect(() => {
-    const { userId } = params;
-
     const fetchUser = async () => {
-      const userData = await getUser(Number(userId));
-      setUser(userData);
+      try {
+        const user = await getUser(Number(userId));
+        setUser(user);
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+      }
     };
 
-    try {
-      fetchUser();
-    } catch (error) {
-      console.log("Not user found", error);
-    }
-  }, [params]);
+    fetchUser();
+  }, [userId]);
 
   const handleProfileRedirect = () => {
     router.push(`/${user?.id}/profile`);
@@ -35,8 +35,9 @@ export default function WelcomePage() {
   };
 
   if (!user) {
+    // TODO: Create a common component.
     return (
-      <Container>
+      <Container py="xl">
         <Loader />
         <Text>Loading user data...</Text>
       </Container>
@@ -44,7 +45,7 @@ export default function WelcomePage() {
   }
 
   return (
-    <Container>
+    <Container py="xl">
       <Title>Welcome, {user.name}!</Title>
       <Group grow my="lg">
         <Button onClick={handleProfileRedirect}>Go to profile</Button>

@@ -14,47 +14,47 @@ import {
 import { User, Post } from "@/types";
 import { getUser } from "@/services/users/api";
 import PostCard from "@/components/molecules/PostCard";
-import { getAllPosts } from "@/services/posts/api";
+import { getPosts } from "@/services/posts/api";
 import PostForm from "@/components/organisms/PostForm.tsx";
 
+// TODO: Document properly.
 export default function PostPage() {
   const router = useRouter();
   const params = useParams();
-  const [user, setUser] = useState<User | null>(null);
-  const [posts, setPosts] = useState<Post[] | null>(null);
+  const [user, setUser] = useState<User>();
+  const [posts, setPosts] = useState<Post[]>();
+
+  const { userId } = params;
 
   useEffect(() => {
-    const { userId } = params;
+    const fetchData = async () => {
+      try {
+        const user = await getUser(Number(userId));
+        const friendsIds = [Number(user.id), ...user.friends];
+        const posts = await getPosts(friendsIds);
 
-    const loadData = async () => {
-      const userData = await getUser(Number(userId));
-
-      const allowedUserIds = [Number(userData.id), ...(userData.friends || [])];
-
-      const allPosts = await getAllPosts(allowedUserIds);
-
-      setUser(userData);
-      setPosts(allPosts);
+        setUser(user);
+        setPosts(posts);
+      } catch (error) {
+        console.log("Error", error);
+      }
     };
 
-    try {
-      loadData();
-    } catch (error) {
-      console.log("Error", error);
-    }
-  }, [params]);
+    fetchData();
+  }, [userId]);
 
   if (!user || !posts) {
+    // TODO: Create a common component.
     return (
-      <Container>
+      <Container py="xl">
         <Loader />
-        <Text>Loading posts...</Text>
+        <Text>Loading user data...</Text>
       </Container>
     );
   }
 
   return (
-    <Container>
+    <Container py="xl">
       <Group align="left" mb="md">
         <Button variant="default" onClick={() => router.back()}>
           ← Go Back
@@ -63,10 +63,11 @@ export default function PostPage() {
 
       <Title mb="md">{`${user.name}'s Feed`}</Title>
       <PostForm
-        userId={user.id}
-        onSuccess={(payload) => {
-          const data = JSON.parse(payload);
-          setPosts([...posts, { ...data, id: new Date().getTime() }]);
+        onSuccess={(post) => {
+          setPosts([
+            ...posts,
+            { ...post, id: new Date().getTime().toString() },
+          ]);
         }}
       />
 

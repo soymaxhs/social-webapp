@@ -8,15 +8,36 @@ import { BASE_URL } from "@/services/settings/constants";
  * @param allowedUserIds - List of user IDs to include in the result.
  * @returns {Promise<Post[]>} Sorted and filtered posts
  */
-export const getAllPosts = async (
-  allowedUserIds: number[]
-): Promise<Post[]> => {
+export const getPosts = async (friendsIds: number[]): Promise<Post[]> => {
   const res = await fetch(`${BASE_URL}/posts`);
   const data: Post[] = await res.json();
 
-  const availablePosts = data
-    .filter((post) => allowedUserIds.includes(post.userId))
+  const sortedPosts = data
+    // This filter is supposed to be done in the backend, but we are doing it here for simplicity.
+    .filter((post) => friendsIds.includes(post.userId))
     .sort((a, b) => b.likes.length - a.likes.length);
 
-  return availablePosts;
+  return sortedPosts;
+};
+
+// TODO: Document properly
+export const postPost = async (payload: Post): Promise<Post> => {
+  const res = await fetch(`${BASE_URL}/posts`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  return res.json();
+};
+
+// TODO: Document properly
+export const patchLikesPost = async (payload: Post): Promise<Post> => {
+  const res = await fetch(`${BASE_URL}/posts/${payload.id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ likes: payload.likes }),
+  });
+
+  return res.json();
 };

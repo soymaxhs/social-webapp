@@ -8,6 +8,8 @@ export interface User {
   name: string;
   /** Unique username/handle (e.g. johndoe) */
   username: string;
+  // TODO: Document properly.
+  color: string;
   /** Short bio or description of the user */
   bio: string;
   /** Geographical location of the user */

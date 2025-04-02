@@ -3,8 +3,8 @@ import { getUser } from "@/services/users/api";
 import { User } from "@/types";
 import { Button, Card, Group, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { BASE_URL } from "@/services/settings/constants";
 import { useParams } from "next/navigation";
+import { patchLikesPost } from "@/services/posts/api";
 
 export default function PostCard({ post }: PostCardProps) {
   const params = useParams();
@@ -12,34 +12,37 @@ export default function PostCard({ post }: PostCardProps) {
   const [likes, setLikes] = useState(post.likes);
 
   const userId = Number(params.userId);
-
   const hasLiked = likes.some((like) => like.userId === userId);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userData = await getUser(post.userId);
-        setUser(userData);
+        const user = await getUser(userId);
+        setUser(user);
       } catch (error) {
         console.log("User not found", error);
       }
     };
 
     fetchUser();
-  }, [post.userId]);
+  }, [userId]);
 
   const toggleLike = async () => {
     const updatedLikes = hasLiked
       ? likes.filter((like) => like.userId !== userId)
       : [...likes, { userId }];
 
-    setLikes(updatedLikes);
+    const payload = {
+      ...post,
+      likes: updatedLikes,
+    };
 
-    await fetch(`${BASE_URL}/posts/${post.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ likes: updatedLikes }),
-    });
+    try {
+      await patchLikesPost(payload);
+      setLikes(updatedLikes);
+    } catch (error) {
+      console.log("Error updating likes", error);
+    }
   };
 
   return (

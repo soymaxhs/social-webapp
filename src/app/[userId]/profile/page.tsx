@@ -7,29 +7,31 @@ import { User } from "@/types";
 import { getUser } from "@/services/users/api";
 import UserProfile from "@/components/organisms/UserProfile";
 
+// TODO: Document properly.
 export default function ProfilePage() {
   const params = useParams();
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User>();
+
+  const { userId } = params;
 
   useEffect(() => {
-    const { userId } = params;
-
     const fetchUser = async () => {
-      const userData = await getUser(Number(userId));
-      setUser(userData);
+      try {
+        const user = await getUser(Number(userId));
+        setUser(user);
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+      }
     };
 
-    try {
-      fetchUser();
-    } catch (error) {
-      console.log("Not user found", error);
-    }
-  }, [params]);
+    fetchUser();
+  }, [userId]);
 
   if (!user) {
+    // TODO: Create a common component.
     return (
-      <Container>
+      <Container py="xl">
         <Loader />
         <Text>Loading user data...</Text>
       </Container>
@@ -37,7 +39,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <Container>
+    <Container py="xl">
       <Group align="left" mb="md">
         <Button variant="default" onClick={() => router.back()}>
           ← Go Back
