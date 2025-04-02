@@ -15,7 +15,7 @@ import { User, Post } from "@/types";
 import { getUser } from "@/services/users/api";
 import PostCard from "@/components/molecules/PostCard";
 import { getAllPosts } from "@/services/posts/api";
-import PostForm from "@/components/molecules/PostForm.tsx";
+import PostForm from "@/components/organisms/PostForm.tsx";
 
 export default function PostPage() {
   const router = useRouter();

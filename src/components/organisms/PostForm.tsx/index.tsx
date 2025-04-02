@@ -1,13 +1,9 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Textarea, Button, Stack } from "@mantine/core";
+import { Textarea, Button, Stack, TextInput } from "@mantine/core";
 import { BASE_URL } from "@/services/settings/constants";
-
-// TODO: Relocate this
-type PostFormData = {
-  content: string;
-};
+import { Post } from "@/types";
 
 // TODO: Relocate this
 type Props = {
@@ -17,13 +13,13 @@ type Props = {
 
 // TODO: Document properly
 export default function PostForm({ userId, onSuccess }: Props) {
-  const { register, handleSubmit, reset, formState } = useForm<PostFormData>();
+  const { register, handleSubmit, reset, formState } = useForm<Post>();
   const { isSubmitting } = formState;
 
-  const onSubmit = async (data: PostFormData) => {
+  const onSubmit = async (data: Post) => {
     const payload = JSON.stringify({
-      userId,
-      content: data.content,
+      ...data,
+      userId: userId,
     });
 
     const res = await fetch(`${BASE_URL}/posts`, {
@@ -43,6 +39,7 @@ export default function PostForm({ userId, onSuccess }: Props) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack>
+        <TextInput placeholder="Title" {...register("title")} />
         <Textarea
           placeholder="What's on your mind?"
           autosize

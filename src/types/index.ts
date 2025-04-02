@@ -24,5 +24,9 @@ export interface User {
 export interface Post {
   id: string;
   userId: number;
+  title: string;
   content: string;
+  likes: {
+    userId: number;
+  }[];
 }

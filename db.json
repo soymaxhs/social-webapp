@@ -1,111 +1,155 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "John Doe",
       "username": "johndoe",
       "bio": "Just a regular guy exploring the web.",
       "location": "New York, USA",
       "emoji": "🧔",
-      "interests": ["tech", "music", "travel"],
-      "friends": [2, 3]
+      "interests": [
+        "tech",
+        "music",
+        "travel"
+      ],
+      "friends": [
+        2,
+        3
+      ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Maximiliano Heredia Santoyo",
       "username": "maxheredia",
       "bio": "Full-stack dev & taco enthusiast 🌮",
       "location": "Guadalajara, MX",
       "emoji": "🧑‍💻",
-      "interests": ["coding", "hiking", "UX design"],
-      "friends": [3]
+      "interests": [
+        "coding",
+        "hiking",
+        "UX design"
+      ],
+      "friends": [
+        3
+      ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "CouchSurfing",
       "username": "couchsurfing",
       "bio": "The official test user for this app.",
       "location": "Internet",
       "emoji": "🛋️",
-      "interests": ["community", "travel", "hosting"],
-      "friends": [2]
+      "interests": [
+        "community",
+        "travel",
+        "hosting"
+      ],
+      "friends": [
+        2
+      ]
     }
   ],
   "posts": [
     {
       "id": "1",
       "userId": 1,
-      "content": "My first post!"
+      "title": "Hello World!",
+      "content": "My first post!",
+      "likes": [
+        {
+          "userId": 2
+        },
+        {
+          "userId": 3
+        }
+      ]
     },
     {
       "id": "2",
       "userId": 1,
-      "content": "Going for a hike 🥾"
+      "title": "Weekend Adventure",
+      "content": "Going for a hike 🥾",
+      "likes": [
+        {
+          "userId": 3
+        }
+      ]
     },
     {
       "id": "3",
       "userId": 1,
-      "content": "Listening to some classic rock 🎸"
+      "title": "Rockin’ Out",
+      "content": "Listening to some classic rock 🎸",
+      "likes": []
     },
     {
       "id": "4",
-      "userId": 1,
-      "content": "Just booked a trip to Iceland!"
+      "userId": 2,
+      "title": "Code Deploy!",
+      "content": "Just pushed some code 🚀",
+      "likes": [
+        {
+          "userId": 3
+        },
+        {
+          "userId": 1
+        }
+      ]
     },
     {
       "id": "5",
-      "userId": 1,
-      "content": "Trying out a new coding keyboard ⌨️"
+      "userId": 2,
+      "title": "Design + Tacos",
+      "content": "UX audit complete. Time for tacos 🌮",
+      "likes": [
+        {
+          "userId": 3
+        }
+      ]
     },
     {
       "id": "6",
       "userId": 2,
-      "content": "Just pushed some code 🚀"
+      "title": "Nature Break",
+      "content": "Weekend hike at Barranca del Cobre!",
+      "likes": [
+        {
+          "userId": 1
+        }
+      ]
     },
     {
       "id": "7",
-      "userId": 2,
-      "content": "UX audit complete. Time for tacos 🌮"
+      "userId": 3,
+      "title": "Weekend Hosting",
+      "content": "Hosting someone this weekend!",
+      "likes": [
+        {
+          "userId": 1
+        },
+        {
+          "userId": 2
+        }
+      ]
     },
     {
       "id": "8",
-      "userId": 2,
-      "content": "Weekend hike at Barranca del Cobre!"
+      "userId": 3,
+      "title": "Room Upgrade",
+      "content": "Added a hammock to the guest room",
+      "likes": [
+        {
+          "userId": 1
+        }
+      ]
     },
     {
       "id": "9",
-      "userId": 2,
-      "content": "Dark mode enabled 🌑"
-    },
-    {
-      "id": "10",
-      "userId": 2,
-      "content": "Sketching out a new app idea 📱"
-    },
-    {
-      "id": "11",
       "userId": 3,
-      "content": "Hosting someone this weekend!"
-    },
-    {
-      "id": "12",
-      "userId": 3,
-      "content": "Added a hammock to the guest room 🪢"
-    },
-    {
-      "id": "13",
-      "userId": 3,
-      "content": "Couch ready, Wi-Fi strong 💻"
-    },
-    {
-      "id": "14",
-      "userId": 3,
-      "content": "Just said goodbye to a guest from Berlin 🇩🇪"
-    },
-    {
-      "id": "15",
-      "userId": 3,
-      "content": "Looking for surfers next week 🌍"
+      "title": "Couch Ready",
+      "content": "Couch ready, Wi-Fi strong 💻",
+      "likes": []
     }
   ]
 }
