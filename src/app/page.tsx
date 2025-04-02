@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import { User } from "@/types";
 import UserCard from "@/components/molecules/UserCard";
 
-const COLORS = ["red", "green", "blue"];
+const COLORS = ["blue", "green", "orange"];
 
-export default function Dashboard() {
+export default function DashboardPage() {
   const [users, setUsers] = useState<User[] | null>(null);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function Dashboard() {
       </Title>
       <SimpleGrid cols={3} spacing="lg">
         {users?.map((user, index) => (
-          <UserCard key={user.id} user={user} bg={COLORS[index]} />
+          <UserCard key={user.id} user={user} bg={COLORS[index]} c="white" />
         ))}
       </SimpleGrid>
       {/* TODO: Remove this. Only for reviewers */}
