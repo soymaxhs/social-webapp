@@ -7,25 +7,71 @@
       "bio": "Just a regular guy exploring the web.",
       "location": "New York, USA",
       "emoji": "🧔",
-      "interests": ["tech", "music", "travel"]
+      "interests": ["tech", "music", "travel"],
+      "friends": [2, 3]
     },
     {
       "id": 2,
       "name": "Maximiliano Heredia Santoyo",
-      "username": "soymaxhs",
-      "bio": "Software Engineer",
+      "username": "maxheredia",
+      "bio": "Full-stack dev & taco enthusiast 🌮",
       "location": "Guadalajara, MX",
       "emoji": "🧑‍💻",
-      "interests": ["coding", "swimming", "UX design"]
+      "interests": ["coding", "hiking", "UX design"],
+      "friends": [3]
     },
     {
       "id": 3,
       "name": "CouchSurfing",
       "username": "couchsurfing",
-      "bio": "Couchsurfing is a global paid accommodation sharing service, also serving as a social network accessible through a website and mobile app.",
+      "bio": "The official test user for this app.",
       "location": "Internet",
       "emoji": "🛋️",
-      "interests": ["community", "travel", "hosting"]
+      "interests": ["community", "travel", "hosting"],
+      "friends": [2]
     }
+  ],
+  "posts": [
+    { "id": 1, "userId": 1, "content": "My first post!" },
+    { "id": 2, "userId": 1, "content": "Going for a hike 🥾" },
+    {
+      "id": 3,
+      "userId": 1,
+      "content": "Listening to some classic rock 🎸"
+    },
+    { "id": 4, "userId": 1, "content": "Just booked a trip to Iceland!" },
+    {
+      "id": 5,
+      "userId": 1,
+      "content": "Trying out a new coding keyboard ⌨️"
+    },
+
+    { "id": 6, "userId": 2, "content": "Just pushed some code 🚀" },
+    {
+      "id": 7,
+      "userId": 2,
+      "content": "UX audit complete. Time for tacos 🌮"
+    },
+    {
+      "id": 8,
+      "userId": 2,
+      "content": "Weekend hike at Barranca del Cobre!"
+    },
+    { "id": 9, "userId": 2, "content": "Dark mode enabled 🌑" },
+    { "id": 10, "userId": 2, "content": "Sketching out a new app idea 📱" },
+
+    { "id": 11, "userId": 3, "content": "Hosting someone this weekend!" },
+    {
+      "id": 12,
+      "userId": 3,
+      "content": "Added a hammock to the guest room 🪢"
+    },
+    { "id": 13, "userId": 3, "content": "Couch ready, Wi-Fi strong 💻" },
+    {
+      "id": 14,
+      "userId": 3,
+      "content": "Just said goodbye to a guest from Berlin 🇩🇪"
+    },
+    { "id": 15, "userId": 3, "content": "Looking for surfers next week 🌍" }
   ]
 }

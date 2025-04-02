@@ -16,4 +16,13 @@ export interface User {
   emoji: string;
   /** List of user interests or hobbies */
   interests: string[];
+  // TODO: Document properly.
+  friends: number[];
+}
+
+// TODO: Document properly.
+export interface Post {
+  id: number;
+  userId: number;
+  content: string;
 }

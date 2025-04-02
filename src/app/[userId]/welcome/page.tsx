@@ -30,6 +30,10 @@ export default function WelcomePage() {
     router.push(`/${user?.id}/profile`);
   };
 
+  const handleFeedRedirect = () => {
+    router.push(`/${user?.id}/posts`);
+  };
+
   if (!user) {
     return (
       <Container>
@@ -44,6 +48,9 @@ export default function WelcomePage() {
       <Title>Welcome, {user.name}!</Title>
       <Group grow my="lg">
         <Button onClick={handleProfileRedirect}>Go to profile</Button>
+        <Button onClick={handleFeedRedirect} color="orange">
+          Go to feed
+        </Button>
       </Group>
     </Container>
   );
