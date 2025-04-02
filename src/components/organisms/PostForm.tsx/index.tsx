@@ -8,7 +8,7 @@ import { postPost } from "@/services/posts/api";
 
 // TODO: Relocate this
 type Props = {
-  onSuccess: (post: Post) => void;
+  onSuccess: () => void;
 };
 
 // TODO: Document properly
@@ -23,12 +23,13 @@ export default function PostForm({ onSuccess }: Props) {
     const payload: Post = {
       ...data,
       userId: Number(userId),
+      likes: [],
     };
 
     try {
       await postPost(payload);
       reset();
-      onSuccess(payload);
+      onSuccess();
     } catch (error) {
       // TODO: Notify the user about the error.
       console.log("Error", error);

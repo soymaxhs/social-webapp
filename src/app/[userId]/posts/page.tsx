@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
   Container,
@@ -26,14 +26,18 @@ export default function PostPage() {
 
   const { userId } = params;
 
+  const friendsIds = useMemo(
+    () => (user ? [Number(user.id), ...user.friends] : []),
+    [user]
+  );
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const user = await getUser(Number(userId));
-        const friendsIds = [Number(user.id), ...user.friends];
-        const posts = await getPosts(friendsIds);
-
         setUser(user);
+
+        const posts = await getPosts(friendsIds);
         setPosts(posts);
       } catch (error) {
         console.log("Error", error);
@@ -41,7 +45,7 @@ export default function PostPage() {
     };
 
     fetchData();
-  }, [userId]);
+  }, [friendsIds, userId]);
 
   if (!user || !posts) {
     // TODO: Create a common component.
@@ -63,11 +67,14 @@ export default function PostPage() {
 
       <Title mb="md">{`${user.name}'s Feed`}</Title>
       <PostForm
-        onSuccess={(post) => {
-          setPosts([
-            ...posts,
-            { ...post, id: new Date().getTime().toString() },
-          ]);
+        onSuccess={async () => {
+          try {
+            const posts = await getPosts(friendsIds);
+
+            setPosts(posts);
+          } catch (error) {
+            console.log("Error", error);
+          }
         }}
       />
 
