@@ -3,7 +3,15 @@
 import { useEffect, useState } from "react";
 import { User } from "@/types";
 import { getUser } from "@/services/users/api";
-import { Container, Title, Text, Loader, Group, Button } from "@mantine/core";
+import {
+  Container,
+  Title,
+  Text,
+  Loader,
+  Group,
+  Button,
+  Stack,
+} from "@mantine/core";
 import { useParams, useRouter } from "next/navigation";
 
 export default function WelcomePage() {
@@ -35,7 +43,7 @@ export default function WelcomePage() {
   };
 
   if (!user) {
-    // TODO: Create a common component.
+    // TODO: Create a common loading component.
     return (
       <Container py="xl">
         <Loader />
@@ -46,13 +54,27 @@ export default function WelcomePage() {
 
   return (
     <Container py="xl">
-      <Title>Welcome, {user.name}!</Title>
-      <Group grow my="lg">
-        <Button onClick={handleProfileRedirect}>Go to profile</Button>
-        <Button onClick={handleFeedRedirect} color="orange">
-          Go to feed
+      <Stack>
+        <Group my="lg" justify="space-between" align="center">
+          <Title>Welcome, {user.name}!</Title>
+          <Button bg={"cyan"} onClick={handleProfileRedirect}>
+            <Text>⚙️ Profile Settings</Text>
+          </Button>
+        </Group>
+        <Button
+          variant="default"
+          onClick={handleFeedRedirect}
+          style={{ width: "100%" }}
+        >
+          <Text>📜 Go to Feed</Text>
         </Button>
-      </Group>
+
+        <Text ta="center" c="dimmed">
+          A mock social platform. The app simulates a user feed, profile view,
+          and post interactions using mocked APIs and follows modern UI
+          architecture and component design best practices.
+        </Text>
+      </Stack>
     </Container>
   );
 }

@@ -36,15 +36,22 @@ export default function DashboardPage() {
     <Container py="xl">
       <Stack gap="md">
         <Title ta="center" c="dark">
-          Select Your User
+          Login to your account
         </Title>
 
         {users ? (
-          <SimpleGrid cols={3}>
-            {users.map((user) => (
-              <UserCard key={user.id} user={user} bg={user.color} c="white" />
-            ))}
-          </SimpleGrid>
+          <>
+            <SimpleGrid cols={3}>
+              {users.map((user) => (
+                <UserCard key={user.id} user={user} bg={user.color} c="white" />
+              ))}
+            </SimpleGrid>
+
+            <Text ta="center" c="dimmed">
+              This is a fake login page for demonstration purposes only. No
+              actual authentication is performed.
+            </Text>
+          </>
         ) : (
           <Paper withBorder shadow="sm" p="lg">
             <Stack align="center" gap="sm">

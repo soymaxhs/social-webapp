@@ -1,7 +1,7 @@
 import { PostCardProps } from "@/components/molecules/PostCard/type";
 import { getUser } from "@/services/users/api";
 import { User } from "@/types";
-import { Button, Card, Group, Stack, Text } from "@mantine/core";
+import { Button, Grid, Group, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { patchLikesPost } from "@/services/posts/api";
@@ -51,29 +51,41 @@ export default function PostCard({ post }: PostCardProps) {
   };
 
   return (
-    <Card withBorder radius="md" padding="md" shadow="xs">
-      <Stack gap="xs">
-        <Group justify="space-between">
-          <Text fw={600}>{post.title}</Text>
-          <Text size="sm" c="grape">
-            {user?.name}
-          </Text>
-        </Group>
-
-        <Group justify="space-between" grow>
-          <Button color="cyan" onClick={handlePostDetailRedirect}>
-            Details
-          </Button>
+    <Grid
+      align="stretch"
+      bd={"1px solid #ccc"}
+      mb="md"
+      style={{ borderRadius: "8px" }}
+    >
+      <Grid.Col span="auto">
+        <Stack gap="xs" p="xs">
+          <Group justify="space-between">
+            <Text fw={600}>{post.title}</Text>
+            <Text size="sm" c="grape">
+              {String(user?.id) === String(userId)
+                ? `${user?.name} (You ⭐)`
+                : user?.name}
+            </Text>
+          </Group>
           <Button
-            variant={hasLiked ? "light" : "outline"}
+            variant={hasLiked ? "filled" : "outline"}
             size="xs"
             color="gray"
             onClick={toggleLike}
           >
             👍 {likes.length} {likes.length === 1 ? "Like" : "Likes"}
           </Button>
-        </Group>
-      </Stack>
-    </Card>
+        </Stack>
+      </Grid.Col>
+      <Grid.Col span="content">
+        <Button
+          color="cyan"
+          onClick={handlePostDetailRedirect}
+          style={{ height: "100%" }}
+        >
+          Details
+        </Button>
+      </Grid.Col>
+    </Grid>
   );
 }

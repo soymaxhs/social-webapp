@@ -96,13 +96,16 @@ export default function PostDetailPage() {
             {post.title}
           </Text>
           <Text size="sm" c="gray">
-            Posted by {user.name}
+            Posted by
+            {String(user?.id) === String(userId)
+              ? ` ${user?.name} (You ⭐)`
+              : user?.name}
           </Text>
           <Text>{post.content}</Text>
 
           <Group justify="flex-start">
             <Button
-              variant={hasLiked ? "light" : "outline"}
+              variant={hasLiked ? "filled" : "outline"}
               size="sm"
               color="gray"
               onClick={toggleLike}
