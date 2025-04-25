@@ -4,7 +4,7 @@
       "id": "1",
       "name": "John Doe",
       "username": "johndoe",
-      "color": "blue",
+      "color": "red",
       "bio": "Just a regular guy exploring the web.",
       "location": "New York, USA",
       "emoji": "🧔",
@@ -24,9 +24,9 @@
     },
     {
       "id": "3",
-      "name": "CouchSurfing",
-      "username": "couchsurfing",
-      "color": "orange",
+      "name": "Other User",
+      "username": "otheruser",
+      "color": "blue",
       "bio": "The official test user for this app.",
       "location": "Internet",
       "emoji": "🛋️",
@@ -74,10 +74,10 @@
       "content": "Just pushed some code 🚀",
       "likes": [
         {
-          "userId": 3
+          "userId": 1
         },
         {
-          "userId": 1
+          "userId": 3
         }
       ]
     },
