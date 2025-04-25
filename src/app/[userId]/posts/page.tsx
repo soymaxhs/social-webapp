@@ -15,9 +15,12 @@ import { User, Post } from "@/types";
 import { getUser } from "@/services/users/api";
 import PostCard from "@/components/molecules/PostCard";
 import { getPosts } from "@/services/posts/api";
-import PostForm from "@/components/organisms/PostForm.tsx";
 
-// TODO: Document properly.
+/**
+ * TODO: Document properly, using JSDoc.
+ *
+ * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+ */
 export default function PostPage() {
   const router = useRouter();
   const params = useParams();
@@ -44,7 +47,7 @@ export default function PostPage() {
   }, [userId]);
 
   if (!user || !posts) {
-    // TODO: Create a common component.
+    // TODO: Create a common loading component.
     return (
       <Container py="xl">
         <Loader />
@@ -55,25 +58,18 @@ export default function PostPage() {
 
   return (
     <Container py="xl">
-      <Group align="left" mb="md">
+      <Group align="left" mb="md" justify="space-between">
         <Button variant="default" onClick={() => router.back()}>
           ← Go Back
+        </Button>
+
+        {/* TODO: Create a new post redirect button */}
+        <Button bg="green" onClick={() => router.push(`/${user.id}/posts/new`)}>
+          + New Post
         </Button>
       </Group>
 
       <Title mb="md">{`${user.name}'s Feed`}</Title>
-      <PostForm
-        onSuccess={async () => {
-          try {
-            const friendsIds = [Number(user.id), ...user.friends];
-            const posts = await getPosts(friendsIds);
-
-            setPosts(posts);
-          } catch (error) {
-            console.log("Error", error);
-          }
-        }}
-      />
 
       <Stack gap="xs" my="lg">
         {posts.map((post) => (
