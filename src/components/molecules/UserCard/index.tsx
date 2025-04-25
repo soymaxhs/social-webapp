@@ -2,7 +2,11 @@ import { UserCardProps } from "@/components/molecules/UserCard/types";
 import { Card, Text } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
-// TODO: Document properly.
+/**
+ * TODO: Document properly, using JSDoc.
+ *
+ * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+ */
 export default function UserCard({ user, ...rest }: UserCardProps) {
   const router = useRouter();
 
@@ -22,7 +26,7 @@ export default function UserCard({ user, ...rest }: UserCardProps) {
       {...rest}
       onClick={handleClick}
     >
-      <Text mt="md" ta="center" style={{ fontWeight: "bold" }}>
+      <Text ta="center" style={{ fontWeight: "bold" }}>
         {name}
       </Text>
     </Card>

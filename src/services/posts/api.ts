@@ -20,7 +20,11 @@ export const getPosts = async (friendsIds: number[]): Promise<Post[]> => {
   return sortedPosts;
 };
 
-// TODO: Document properly
+/**
+ * TODO: Document properly, using JSDoc.
+ *
+ * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+ */
 export const postPost = async (payload: Post): Promise<Post> => {
   const res = await fetch(`${BASE_URL}/posts`, {
     method: "POST",
@@ -31,7 +35,11 @@ export const postPost = async (payload: Post): Promise<Post> => {
   return res.json();
 };
 
-// TODO: Document properly
+/**
+ * TODO: Document properly, using JSDoc.
+ *
+ * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+ */
 export const patchLikesPost = async (payload: Post): Promise<Post> => {
   const res = await fetch(`${BASE_URL}/posts/${payload.id}`, {
     method: "PATCH",
@@ -42,13 +50,21 @@ export const patchLikesPost = async (payload: Post): Promise<Post> => {
   return res.json();
 };
 
-// TODO: Document properly
+/**
+ * TODO: Document properly, using JSDoc.
+ *
+ * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+ */
 export const getPost = async (id: string): Promise<Post> => {
   const res = await fetch(`${BASE_URL}/posts/${id}`);
   return res.json();
 };
 
-// TODO: Document properly
+/**
+ * TODO: Document properly, using JSDoc.
+ *
+ * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+ */
 export const deletePost = async (id: string): Promise<void> => {
   await fetch(`${BASE_URL}/posts/${id}`, {
     method: "DELETE",

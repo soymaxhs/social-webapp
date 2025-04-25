@@ -11,7 +11,11 @@ type Props = {
   onSuccess: () => void;
 };
 
-// TODO: Document properly
+/**
+ * TODO: Document properly, using JSDoc.
+ *
+ * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+ */
 export default function PostForm({ onSuccess }: Props) {
   const params = useParams();
   const { register, handleSubmit, reset, formState } = useForm<Post>();

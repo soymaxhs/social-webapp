@@ -7,7 +7,11 @@ import { User } from "@/types";
 import { getUser } from "@/services/users/api";
 import UserProfile from "@/components/organisms/UserProfile";
 
-// TODO: Document properly.
+/**
+ * TODO: Document properly, using JSDoc.
+ *
+ * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+ */
 export default function ProfilePage() {
   const params = useParams();
   const router = useRouter();
@@ -29,7 +33,7 @@ export default function ProfilePage() {
   }, [userId]);
 
   if (!user) {
-    // TODO: Create a common component.
+    // TODO: Create a common loading component.
     return (
       <Container py="xl">
         <Loader />

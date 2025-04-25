@@ -8,7 +8,11 @@ export interface User {
   name: string;
   /** Unique username/handle (e.g. johndoe) */
   username: string;
-  // TODO: Document properly.
+  /**
+   * TODO: Document properly, using JSDoc.
+   *
+   * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+   */
   color: string;
   /** Short bio or description of the user */
   bio: string;
@@ -18,11 +22,19 @@ export interface User {
   emoji: string;
   /** List of user interests or hobbies */
   interests: string[];
-  // TODO: Document properly.
+  /**
+   * TODO: Document properly, using JSDoc.
+   *
+   * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+   */
   friends: number[];
 }
 
-// TODO: Document properly.
+/**
+ * TODO: Document properly, using JSDoc.
+ *
+ * @see {@link https://jsdoc.app/ } for more information on how to document your code.
+ */
 export interface Post {
   id: string;
   userId: number;
